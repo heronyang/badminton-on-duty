@@ -1,38 +1,4 @@
-Filename (use for random seed as well): 2023-10-08.txt
-Names:
-('Heron', '1')
-('Alice', '2')
-('Brendon', '3')
-('Tina', '4')
-('Danny', '5')
-('Mark', '6')
-('Kevin', '7')
-('Audi', '8')
-('Chi', '9')
-('Nelson', '10')
-('Keiko', '11')
-('Jay', '12')
-('Charlie', '13')
-('Pochun', '14')
-('Kevin', '15')
-('Weichen', '16')
-('Yichen', '17')
-('Eason', '18')
-('Cliff', '19')
-('Lance', '20')
-('Alvin', '21')
-('Janice', '22')
-('Ian', '23')
-('Fiona', '24')
-('Jimmy', '25')
-('John', '26')
-('Jordan', '27')
-('Jack Lin', '28')
-('Jack', '29')
-('Yishan', '30')
-('Joey', '31')
-('Gina', '32')
-('Wade', '33')
+On-duty 2023-10-08
 1:30-2:00: Janice (22) + Eason (18)
 2:00-2:30: Alice (2) + Lance (20)
 2:30-3:00: Ian (23) + Audi (8)
@@ -41,3 +7,9 @@ Names:
 4:00-4:30: Weichen (16) + Nelson (10)
 4:30-5:00: Gina (32) + Jay (12)
 5:00-end: Mark (6) + Wade (33)
+--
+Instruction
+1. 在群裡，如果”unassigned”達4人，把每4人sign到未滿8人的場（優先選已經有sign 4人的場，再選附近的快結束的場）。
+2. 在電腦上，任何有我們sign的球場，如果剩下時間在30分鐘內，把在場上的4人unassign後再sign回queue去。
+3. 做任何變更之後，更新群裡面的訊息。
+4. 結束時提醒下一個On-duty。

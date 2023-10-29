@@ -17,7 +17,9 @@ Instruction
 1. 在群裡，如果”unassigned”達4人，把每4人sign到未滿8人的場（優先選已經有sign 4人的場，再選附近的快結束的場）。
 2. 在電腦上，任何有我們sign的球場，如果剩下時間在30分鐘內，把在場上的4人unassign後再sign回queue去。
 3. 做任何變更之後，更新群裡面的訊息。
-4. 結束時提醒下一個On-duty。""")
+4. 結束時提醒下一個On-duty。
+--
+Note: On-Duty需要調整的人，自行跟其他團員協調即可。""")
 
 def main():
   filename = sys.argv[1]

@@ -4,16 +4,48 @@
 <head>
     <title>Happy Badminton - Oncall Shuffler</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        html {
+            margin: 10px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 200px;
+        }
+
+        #result {
+            border-style: solid;
+            padding: 10px;
+            margin-top: 10px;
+        }
+    </style>
+
+    <script>
+        function copyToClipboard() {
+            document.getElementById("result").select();
+            document.execCommand('copy');
+            alert("Copied!");
+        }
+    </script>
 </head>
 
 <body>
     <h2>Happy Badminton - Oncall Shuffler</h2>
     <form method="post">
-        <textarea name="content" placeholder="TBD">{{ request.form['content'] }}</textarea>
+        <textarea name="content" placeholder="11/05 Sunday 1:30pm @ Santa Clara
+Bintang
+
+1. Name
+...
+
+- Venmo @Heron-Yang $3 shuttlecock fee before you come.
+- Reply by Sunday 11am." rows="50">{{ request.form['content'] }}</textarea>
         <br>
         <button type="submit">Submit</button>
     </form>
-    <div>{{result}}</div>
+    <textarea readonly id="result">{{result}}</textarea>
+    <button onclick="copyToClipboard()">Copy to Clipboard</button>
 </body>
 
 </html>

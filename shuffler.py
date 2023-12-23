@@ -1,9 +1,7 @@
 import random
 from datetime import date, datetime
 
-def extract_name(line):
-  chunks = line.split('.')
-  return chunks[1].strip(), chunks[0].strip()
+from utils import extract_name_from_raw
 
 def extract_request_content(request):
   request = request[request.find('1.'):]
@@ -14,7 +12,7 @@ def get_shuffle_response(request, date, enable_extraction=False,
                          enable_pair_on_duty=True):
   if enable_extraction:
     request = extract_request_content(request)
-  names = [extract_name(line) for line in request.split('\n')[:-1]]
+  names = extract_name_from_raw(request)
   slots = ['1:30', '2:00', '2:30', '3:00', '3:30', '4:00', '4:30', '5:00']
 
   random.seed(str(date))

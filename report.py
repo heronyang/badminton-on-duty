@@ -12,8 +12,11 @@ ALL_FILENAMES = [
     '2023-12-17.txt'
 ]
 NAME_RANK_CUT = 0.70
-TOGETHER_YES_CUT = 6
-APART_CUT = 6
+COUPLE_RANK_CUT = 0.1
+TOGETHER_YES_CUT = 3
+APART_CUT = 15
+
+OUTPUT_COUPLE_RANK = 'couples-rank.csv'
 
 
 def get_names(raw):
@@ -93,16 +96,17 @@ def drop_if_matched_with_a_higher_score(df):
 
 def print_global_couples(df):
   # Filter out the ones out of the cuts.
-  df = df[(df['Apart'] <= APART_CUT) & (df['Together'] >= TOGETHER_YES_CUT)]
-  df = df.sort_values(by=['Apart', 'Together'],
-                      ascending=[True, False]).reset_index(drop=True)
-  print(df)
+  df['Rank'] = (df['Together'] - df['Apart']) / df['Together']
+  df = df[(df['Apart'] <= APART_CUT) & (df['Together'] >= TOGETHER_YES_CUT) &
+          (df['Rank'] >= COUPLE_RANK_CUT)]
+  df = df.sort_values(by='Rank', ascending=False).reset_index(drop=True)
 
   df = drop_reverse_matches(df)
   df = drop_if_matched_with_a_higher_score(df)
 
   print('[Rank: Couple]')
-  print(df.to_string(index=False))
+  print(df.to_string(index=False, formatters={'Rank': '{:,.2%}'.format}))
+  df.to_csv(OUTPUT_COUPLE_RANK)
 
 
 def get_couples(names):

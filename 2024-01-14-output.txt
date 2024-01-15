@@ -1,0 +1,18 @@
+On-duty 2024-01-14
+--
+1:30-2:00: JackyM (22) + Lance (19)
+2:00-2:30: Ian (5) + Jimmy (15)
+2:30-3:00: Tony (8) + Kevin V (27)
+3:00-3:30: Amy (29) + Wendy (28)
+3:30-4:00: Angela (9) + Jordan (11)
+4:00-4:30: Nelson (26) + Joe (14)
+4:30-5:00: Alice (2) + Janice (17)
+5:00-end: Audi (12) + Fiona (4)
+--
+Instruction
+1. 在群裡，如果"unassigned"達4人，把每4人sign到未滿8人的場（優先選已經有sign 4人的場，再選附近的快結束的場）。
+2. 在電腦上，任何有我們sign的球場，如果剩下時間在30分鐘內，把在場上的4人unassign後再sign回queue去。
+3. 做任何變更之後，更新群裡面的訊息。
+4. 結束時提醒下一個On-duty。
+--
+Note: On-Duty需要調整的人，自行跟其他團員協調即可。

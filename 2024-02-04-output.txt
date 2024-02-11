@@ -1,0 +1,18 @@
+On-duty 2024-02-04
+--
+1:30-2:00: Frank - Pochun’s friend (27) + Alvin (17)
+2:00-2:30: Avery (5) + Wesley (43)
+2:30-3:00: Frank (46) + Domeb (30)
+3:00-3:30: Ashley (16) + Rachel (37)
+3:30-4:00: Chris (4) + Tony (34)
+4:00-4:30: Brendon (39) + Pang (29)
+4:30-5:00: Shirley- Kiki’s friend (45) + AK (19)
+5:00-end: Janice (18) + Chiungyun (48)
+--
+Instruction
+1. 在群裡，如果"unassigned"達4人，把每4人sign到未滿8人的場（優先選已經有sign 4人的場，再選附近的快結束的場）。
+2. 在電腦上，任何有我們sign的球場，如果剩下時間在30分鐘內，把在場上的4人unassign後再sign回queue去。
+3. 做任何變更之後，更新群裡面的訊息。
+4. 結束時提醒下一個On-duty。
+--
+Note: On-Duty需要調整的人，自行跟其他團員協調即可。

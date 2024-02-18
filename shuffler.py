@@ -3,6 +3,8 @@ from datetime import date, datetime
 
 from utils import extract_name_from_raw
 
+EXCEPTIONAL_NAMES = ['weichenlin_']
+
 
 def extract_request_content(request):
   request = request[request.find('1.'):]
@@ -14,6 +16,15 @@ def get_random_seed(date):
   return int(date.strftime('%Y%m%d'))
 
 
+def remove_exceptional_names(all_names):
+  names = []
+  for name in all_names:
+    if name[0] in EXCEPTIONAL_NAMES:
+      continue
+    names.append(name)
+  return names
+
+
 def get_shuffle_response(request,
                          date,
                          enable_extraction=False,
@@ -21,7 +32,8 @@ def get_shuffle_response(request,
                          enable_index_to_name=False):
   if enable_extraction:
     request = extract_request_content(request)
-  names = extract_name_from_raw(request)
+  all_names = extract_name_from_raw(request)
+  names = remove_exceptional_names(all_names)
   slots = ['1:30', '2:00', '2:30', '3:00', '3:30', '4:00', '4:30', '5:00']
 
   random.seed(get_random_seed(date))
@@ -29,7 +41,7 @@ def get_shuffle_response(request,
   selected = random.sample(names, len(slots) * selected_num_multipier)
 
   response = 'On-duty ' + str(date) + ' (' + str(
-      len(names)) + ' attended)\n--\n'
+      len(all_names)) + ' attended)\n--\n'
   for i in range(len(slots)):
     end_slot = slots[i + 1] if i + 1 < len(slots) else 'end'
     if enable_pair_on_duty:

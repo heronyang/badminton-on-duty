@@ -1,6 +1,6 @@
 def extract_name(line):
   chunks = line.split('.', 1)
-  return chunks[1].strip().removeprefix('@'), chunks[0].strip()
+  return chunks[1].strip(), chunks[0].strip()
 
 
 def extract_name_from_raw(raw):

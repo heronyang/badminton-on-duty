@@ -3,7 +3,7 @@ from datetime import date, datetime
 
 from utils import extract_name_from_raw
 
-EXCEPTIONAL_NAMES = ['@weichenlin_']
+EXCEPTIONAL_NAMES = []
 
 
 def extract_request_content(request):

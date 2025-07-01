@@ -25,32 +25,53 @@ def remove_exceptional_names(all_names):
   return names
 
 
-def get_shuffle_response(request,
-                         date,
-                         enable_extraction=False,
-                         enable_pair_on_duty=True,
-                         enable_index_to_name=False):
-  if enable_extraction:
-    request = extract_request_content(request)
-  all_names = extract_name_from_raw(request)
-  names = remove_exceptional_names(all_names)
-  slots = ['1:30', '2:00', '2:30', '3:00', '3:30', '4:00', '4:30', '5:00']
-
-  random.seed(get_random_seed(date))
-  selected_num_multipier = 2 if enable_pair_on_duty else 1
-  selected = random.sample(names, len(slots) * selected_num_multipier)
-
-  response = 'On-duty ' + str(date) + ' (' + str(
-      len(all_names)) + ' attended)\n--\n'
-  for i in range(len(slots)):
-    end_slot = slots[i + 1] if i + 1 < len(slots) else 'end'
-    if enable_pair_on_duty:
-      on_duty_name = get_printed_name(selected[i*2], enable_index_to_name) + \
-          ' + ' + get_printed_name(selected[i*2 + 1], enable_index_to_name)
-    else:
-      on_duty_name = get_printed_name(selected[i], enable_index_to_name)
-    response += slots[i] + '-' + end_slot + ': ' + on_duty_name + '\n'
-  return response + get_instructions()
+def get_shuffle_response(names, date, enable_index_to_name=False):
+    """Generate a shuffle response for the given names and date.
+    
+    Args:
+        names: List of names (strings) or a raw request string (for backward compatibility)
+        date: The date for the shuffle (used for random seed)
+        enable_index_to_name: Whether to include indices in the output names
+        
+    Returns:
+        str: Formatted shuffle response
+    """
+    # Handle both list of names and raw string input (for backward compatibility)
+    if isinstance(names, str):
+        # This is a raw request string, extract names from it
+        name_entries = extract_name_from_raw(names)
+        names = [name for name, _ in name_entries]
+    
+    if not names:
+        return "Error: No valid names provided"
+    
+    # Remove exceptional names
+    names = remove_exceptional_names(names)
+    
+    # Define the 8 time slots we want to use
+    time_slots = [
+        '1:30-2:00', '2:00-2:30', '2:30-3:00', '3:00-3:30',
+        '3:30-4:00', '4:00-4:30', '4:30-5:00', '5:00-end'
+    ]
+    
+    # Shuffle with fixed seed based on date
+    random.seed(get_random_seed(date))
+    shuffled_names = names.copy()
+    random.shuffle(shuffled_names)
+    
+    # Generate pairs for each time slot (only up to the number of time slots we have)
+    response = [f'On-duty {date} ({len(names)} attended)', '--']
+    
+    # Only generate pairs for the defined time slots (8 slots = 16 people max)
+    max_pairs = len(time_slots)
+    for i in range(0, min(2 * max_pairs, len(shuffled_names) - 1), 2):
+        time_slot = time_slots[i//2]
+        name1 = get_printed_name((shuffled_names[i], str(i+1)), enable_index_to_name)
+        name2 = get_printed_name((shuffled_names[i+1], str(i+2)), enable_index_to_name)
+        response.append(f'{time_slot}: {name1} + {name2}')
+    
+    response.extend(['--', get_instructions()])
+    return '\n'.join(response)
 
 
 def get_printed_name(name, enable_index_to_name):

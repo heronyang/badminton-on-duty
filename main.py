@@ -44,7 +44,7 @@ def main():
         output_file, date = validate_and_parse_filename(input_file)
         
         # Read and process the input file
-        with open(input_file, 'r') as f:
+        with open(input_file, 'r', encoding='utf-8') as f:
             raw_content = f.read()
         
         # Extract names using the utility function
@@ -52,7 +52,7 @@ def main():
         names = [name for name, _ in name_entries]
         
         # Write cleaned output file
-        with open(output_file, 'w') as f:
+        with open(output_file, 'w', encoding='utf-8') as f:
             for i, name in enumerate(names, 1):
                 f.write(f"{i}. {name}\n")
         
@@ -64,7 +64,7 @@ def main():
         
         # Save to output file
         output_filename = date.strftime('%Y-%m-%d') + '-output.txt'
-        with open(output_filename, 'w') as f:
+        with open(output_filename, 'w', encoding='utf-8') as f:
             f.write(response)
         print(f"\nOutput also saved to: {output_filename}")
         

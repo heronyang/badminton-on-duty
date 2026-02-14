@@ -50,8 +50,8 @@ def get_shuffle_response(names, date, enable_index_to_name=False):
 
     # Define the 8 time slots we want to use
     time_slots = [
-        '1:30-2:00', '2:00-2:30', '2:30-3:00', '3:00-3:30',
-        '3:30-4:00', '4:00-4:30', '4:30-5:00', '5:00-end'
+        '2:00-2:30', '2:30-3:00', '3:00-3:30', '3:30-4:00',
+        '4:00-4:30', '4:30-5:00', '5:00-end'
     ]
 
     # Shuffle with fixed seed based on date
